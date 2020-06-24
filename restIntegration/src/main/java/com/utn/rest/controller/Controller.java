@@ -1,14 +1,14 @@
 package com.utn.rest.controller;
 
+import com.utn.rest.model.LoginRequestDto;
 import com.utn.rest.model.UserDto;
 import com.utn.rest.service.IntegrationService;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiResponse;
 import io.swagger.annotations.ApiResponses;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/api")
@@ -41,5 +41,14 @@ public class Controller {
     })
     public String getString() {
         return integrationService.getStringFromApi();
+    }
+
+    @PostMapping("/login")
+    @ApiOperation(value="Se loguea con un User")
+    @ApiResponses({
+            @ApiResponse(code=200,message = "Success")
+    })
+    public ResponseEntity login(@RequestBody LoginRequestDto loginRequestDto) {
+        return integrationService.login(loginRequestDto);
     }
 }
