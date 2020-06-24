@@ -18,7 +18,7 @@ public class Controller {
     IntegrationService integrationService;
 
 
-    @GetMapping("/invoices")
+    @GetMapping("/invoices/{date}")
     @ApiOperation(value="Trae las facturas de una determinada fecha.")
     @ApiResponses({
             @ApiResponse(code=200,message = "Success."),
