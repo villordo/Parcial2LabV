@@ -1,7 +1,6 @@
 package com.utn.rest.controller;
 
-import com.utn.rest.model.LoginRequestDto;
-import com.utn.rest.model.UserDto;
+import com.utn.rest.model.DateDto;
 import com.utn.rest.service.IntegrationService;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiResponse;
@@ -18,37 +17,15 @@ public class Controller {
     @Autowired
     IntegrationService integrationService;
 
-    /*@GetMapping("/pet")
-    @ApiOperation(value="Trae una mascota")
-    @ApiResponses({
-            @ApiResponse(code=200,message = "Success")
-    })
-    public Pet getPet() {
-        return integrationService.getPet();
-    }*/
-    @GetMapping("/user")
-    @ApiOperation(value="Trae un user por ID")
-    @ApiResponses({
-            @ApiResponse(code=200,message = "Success")
-    })
-    public UserDto getUser() {
-        return integrationService.getUserByIdFromApi();
-    }
-    @GetMapping("/string")
-    @ApiOperation(value="Trae string que dice hola")
-    @ApiResponses({
-            @ApiResponse(code=200,message = "Success")
-    })
-    public String getString() {
-        return integrationService.getStringFromApi();
-    }
 
-    @PostMapping("/login")
-    @ApiOperation(value="Se loguea con un User")
+    @GetMapping("/invoices")
+    @ApiOperation(value="Trae las facturas de una determinada fecha.")
     @ApiResponses({
-            @ApiResponse(code=200,message = "Success")
+            @ApiResponse(code=200,message = "Success."),
+            @ApiResponse(code=204,message = "Sin contenido."),
+            @ApiResponse(code=404,message = "Error de validacion.")
     })
-    public ResponseEntity login(@RequestBody LoginRequestDto loginRequestDto) {
-        return integrationService.login(loginRequestDto);
+    public ResponseEntity getInvoicesByDate(@PathVariable String date) {
+        return integrationService.getInvoicesByDate(date);
     }
 }
